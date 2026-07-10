@@ -3,7 +3,7 @@ import sqlite3
 import os
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24)
+app.secret_key = 'task-management-super-secret-key-vercel'
 
 # Hardcoded admin credentials
 ADMIN_USERNAME = 'admin'
