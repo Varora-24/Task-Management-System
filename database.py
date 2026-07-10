@@ -1,7 +1,10 @@
 import sqlite3
+import os
+
+DATABASE = '/tmp/task_management.db' if os.environ.get('VERCEL') else 'task_management.db'
 
 def init_db():
-    conn = sqlite3.connect('task_management.db')
+    conn = sqlite3.connect(DATABASE)
     cursor = conn.cursor()
 
     # Create Task_Titles table

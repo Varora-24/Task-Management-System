@@ -9,7 +9,14 @@ app.secret_key = 'task-management-super-secret-key-vercel'
 ADMIN_USERNAME = 'admin'
 ADMIN_PASSWORD = 'password123'
 
-DATABASE = 'task_management.db'
+DATABASE = '/tmp/task_management.db' if os.environ.get('VERCEL') else 'task_management.db'
+
+@app.before_request
+def ensure_db():
+    if os.environ.get('VERCEL'):
+        if not os.path.exists(DATABASE):
+            from database import init_db
+            init_db()
 
 def get_db():
     db = getattr(g, '_database', None)
